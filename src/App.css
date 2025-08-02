@@ -1,42 +1,126 @@
 #root {
   max-width: 1280px;
   margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #b8a897;
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 3rem auto 0 auto;
   padding: 2rem;
+  display: flex;
+  box-sizing: border-box;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(5, 5, 5, 0.08);
+  background-color: #b8b293;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+} 
+
+form {
+  display: flex;
+  max-width: auto;
+  flex-direction: column;
+  gap: 1rem;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+input,
+textarea {
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #534503;
+  font-size: 24px;
+  font-family: inherit;
+  box-sizing: border-box;
+  background-color: #e6e3d7;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+textarea {
+  resize: horizontal;
+  min-height: 100px;
+}
+
+.submit {
+  padding: 14px;
+  max-width: max-content;
+  border-radius: 8px;
+  border: 1px solid #4e3939;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #2a585e;
+  color: rgb(255, 252, 252);
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-right: 12px;
+}
+
+button:hover {
+  background-color: #042f35;
+}
+
+.link-card {
+  background-color: #8d7962;
+  border: 1px solid #94908e;
+  border-radius: 10px;
+  padding: 16px;
+  margin-top: 48px;
+  box-shadow: 4px 4px 8px rgba(229, 219, 186, 0.2);
+}
+
+.link-card h3 {
+  margin: 0;
+  font-size: 20px;
+  color: #60a3aa;
+}
+
+.link-card a {
+  color: #046677;
+  text-decoration: none;
+}
+
+@media (max-width: 1280px) {
+  h1 {
+    font-size: 1.25rem;
   }
-  to {
-    transform: rotate(360deg);
+
+  .container {
+    padding: 1rem;
+  }
+
+  .link-card {
+    padding: 0.75rem;
+  }
+
+  .link-card button {
+    font-size: 0.9rem;
+    width: 100%;   }
+
+   button {
+    font-size: 1rem;
+    padding: 0.6rem 1rem;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-} 

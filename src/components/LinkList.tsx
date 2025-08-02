@@ -1,3 +1,5 @@
+import React from 'react';
+import { FaEdit, FaTrash} from 'react-icons/fa';
 import type { LinkItem } from '../types/Link';
 
 type Props = {
@@ -18,12 +20,19 @@ function LinkList({ links, onDelete, onEdit }: Props) {
               {link.title}
             </a>
           </h3>
-          {link.description && <p>{link.description}</p>}
-          {Array.isArray(link.tags) && link.tags.length > 0 && (
-            <p><strong>Tags:</strong> {link.tags.join(', ')}</p>
+          {link.description && <p>{link.description}</p>} 
+          {Array.isArray(link.tags) && link.tags.length > 0 && 
+          (
+            <p><strong>Tags:</strong> {link.tags. join(' , ')}</p>
           )}
-          <button onClick={() => onEdit(link)}>✏️ Edit</button>
-          <button onClick={() => onDelete(link.id)}>🗑 Delete</button>
+          <button onClick={() => onEdit(link)}> 
+            <FaEdit style={{ marginRight: '8px'}}/>
+             Edit
+          </button>
+          <button onClick={() => onDelete(link.id)}>
+            <FaTrash style={{ marginRight: '8px'}}/>
+             Delete
+          </button>
         </div>
       ))}
     </div>

@@ -1,11 +1,25 @@
+import React from "react";
+import { FaSearch } from "react-icons/fa";
+
 type Props = {
   searchTerm: string;
   onSearchChange: (term: string) => void;
 };
 
-function SearchBar({ searchTerm, onSearchChange }: Props) {
+const SearchBar: React.FC<Props> = ({ searchTerm, onSearchChange }) => {
   return (
-    <div style={{ marginBottom: '2px' }}>
+    <div style={{ position: 'relative', marginBottom: '28px' }}>
+      <FaSearch
+        style={{
+          position: 'absolute',
+          top: '50%',
+          left: '12px',
+          transform: 'translateY(-50%)',
+          color: '#ffffff',
+          fontSize: '32px',
+          pointerEvents: 'none',
+        }}
+      />
       <input
         type="text"
         placeholder="Search by title, link, description, or tags..."
@@ -13,14 +27,14 @@ function SearchBar({ searchTerm, onSearchChange }: Props) {
         onChange={(e) => onSearchChange(e.target.value)}
         style={{
           width: '100%',
-          padding: '0.75rem',
-          fontSize: '1rem',
-          borderRadius: '5px',
-          border: '1px solid #ccc',
+          padding: '20px 20px 20px 68px',
+          fontSize: '24px',
+          borderRadius: '100px',
+          border: '1px solid #4e3939',
         }}
-      />
+      /> 
     </div>
   );
-}
+};
 
 export default SearchBar;

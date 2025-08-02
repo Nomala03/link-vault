@@ -58,7 +58,7 @@ function App() {
 
   return (
      <div className="container">
-      <h1>🔖 My Links Vault</h1>
+      <h1>My Links Vault</h1>
       <SearchBar searchTerm={searchTerm} onSearchChange={setSearchTerm} />
       <LinkForm 
         onAdd={addLink} 

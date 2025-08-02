@@ -4,88 +4,95 @@ import type { LinkItem } from '../types/Link';
 
 type Props = {
   onAdd: (link: Omit<LinkItem, 'id'>) => void;
-   onUpdate: (link: LinkItem) => void;
-   linkToEdit: LinkItem | null;
+  onUpdate: (link: LinkItem) => void;
+  linkToEdit: LinkItem | null;
 };
 
 function LinkForm({ onAdd, onUpdate, linkToEdit }: Props) {
-  const [title, setTitle] = useState('');
-  const [url, setUrl] = useState('');
-  const [description, setDescription] = useState('');
-  const [tags, setTags] = useState('');
+  const [form, setForm] = useState({
+    title: '',
+    url: '',
+    description: '',
+    tags: '',
+  });
   const [isEditing, setIsEditing] = useState(false);
+
+  const resetForm = () => {
+    setForm({ title: '', url: '', description: '', tags: '' });
+    setIsEditing(false);
+  };
 
   useEffect(() => {
     if (linkToEdit) {
-      setTitle(linkToEdit.title);
-      setUrl(linkToEdit.url);
-      setDescription(linkToEdit.description || '');
-      setTags((linkToEdit.tags || []).join(', '));
+      setForm({
+        title: linkToEdit.title,
+        url: linkToEdit.url,
+        description: linkToEdit.description || '',
+        tags: (linkToEdit.tags || []).join(', '),
+      });
       setIsEditing(true);
     } else {
       resetForm();
     }
-   }, [linkToEdit]);
+  }, [linkToEdit]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setForm(prev => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    // if (!title || !url) return;
-    const tagArray = tags
+    const tagArray = form.tags
       .split(',')
       .map(tag => tag.trim())
       .filter(tag => tag);
 
-     if (isEditing && linkToEdit) {
+    if (isEditing && linkToEdit) {
       onUpdate({
         ...linkToEdit,
-        title,
-        url,
-        description,
+        ...form,
         tags: tagArray,
       });
     } else {
-      onAdd({ title, url, description, tags: tagArray });
+      onAdd({ ...form, tags: tagArray });
     }
 
     resetForm();
-  };
-
-  const resetForm = () => {
-    setTitle('');
-    setUrl('');
-    setDescription('');
-    setTags('');
-    setIsEditing(false);
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <input
         type="text"
+        name="title"
         placeholder="Link Title"
-        value={title}
-        onChange={e => setTitle(e.target.value)}
+        value={form.title}
+        onChange={handleChange}
         required
       />
       <input
         type="url"
+        name="url"
         placeholder="https://example.com"
-        value={url}
-        onChange={e => setUrl(e.target.value)}
+        value={form.url}
+        onChange={handleChange}
         required
       />
       <textarea
-        placeholder="Short description (optional)"
-        value={description}
-        onChange={e => setDescription(e.target.value)}
+        name="description"
+        placeholder="Description (optional)"
+        value={form.description}
+        onChange={handleChange}
       />
       <input
         type="text"
+        name="tags"
         placeholder="Tags (comma-separated)"
-        value={tags}
-        onChange={e => setTags(e.target.value)}
+        value={form.tags}
+        onChange={handleChange}
       />
-      <button type="submit">
+      <button type="submit" className='submit'>
         {isEditing ? 'Update Link' : 'Add Link'}
       </button>
     </form>
