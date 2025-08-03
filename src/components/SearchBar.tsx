@@ -15,7 +15,7 @@ const SearchBar: React.FC<Props> = ({ searchTerm, onSearchChange }) => {
           top: '50%',
           left: '12px',
           transform: 'translateY(-50%)',
-          color: '#ffffff',
+          color: '#3f3c3cff',
           fontSize: '32px',
           pointerEvents: 'none',
         }}
@@ -30,7 +30,7 @@ const SearchBar: React.FC<Props> = ({ searchTerm, onSearchChange }) => {
           padding: '20px 20px 20px 68px',
           fontSize: '24px',
           borderRadius: '100px',
-          border: '1px solid #4e3939',
+          border: '1px solid #69590a8c',
         }}
       /> 
     </div>

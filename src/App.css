@@ -7,7 +7,7 @@
 
 body {
   background-color: #b8a897;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -17,26 +17,32 @@ body {
   width: 100%;
   max-width: 1200px;
   margin: 3rem auto 0 auto;
-  padding: 2rem;
+  padding: 28px;
   display: flex;
   box-sizing: border-box;
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(5, 5, 5, 0.08);
-  background-color: #b8b293;
+  background-color: #b6af8cce;
   flex-direction: column;
-  gap: 1rem;
+  gap: 16px;
+}
+
+p {
+  font-size: 20px;
 }
 
 h1 {
+  font-size: 36px;
+  color: #0a4550;
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 32px;
 } 
 
 form {
+  max-width: 1280px;
   display: flex;
-  max-width: auto;
   flex-direction: column;
-  gap: 1rem;
+  gap: 16px;
   text-align: center;
 }
 
@@ -44,23 +50,18 @@ input,
 textarea {
   padding: 20px;
   border-radius: 8px;
-  border: 1px solid #534503;
+  border: 1px solid #69590a8c;
   font-size: 24px;
   font-family: inherit;
   box-sizing: border-box;
-  background-color: #e6e3d7;
-}
-
-textarea {
-  resize: horizontal;
-  min-height: 100px;
+  background-color: #e2e2e1ab;
 }
 
 .submit {
   padding: 14px;
   max-width: max-content;
   border-radius: 8px;
-  border: 1px solid #4e3939;
+  border: 1px solid #d3d2d2;
   font-family: inherit;
   box-sizing: border-box;
 }
@@ -71,9 +72,8 @@ button {
   border: none;
   padding: 12px;
   border-radius: 8px;
-  font-size: 1rem;
+  font-size: 20px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
   margin-right: 12px;
 }
 
@@ -82,22 +82,22 @@ button:hover {
 }
 
 .link-card {
-  background-color: #8d7962;
+  background-color: #a7927a98;
   border: 1px solid #94908e;
-  border-radius: 10px;
+  border-radius: 8px;
   padding: 16px;
-  margin-top: 48px;
-  box-shadow: 4px 4px 8px rgba(229, 219, 186, 0.2);
+  margin-top: 24px;
+  font-size: 20px;
 }
 
 .link-card h3 {
   margin: 0;
-  font-size: 20px;
-  color: #60a3aa;
+  font-size: 24px;
+  color: #bbccce;
 }
 
 .link-card a {
-  color: #046677;
+  color: #17464e;
   text-decoration: none;
 }
 

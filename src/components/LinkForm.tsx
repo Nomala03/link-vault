@@ -21,7 +21,8 @@ function LinkForm({ onAdd, onUpdate, linkToEdit }: Props) {
     setForm({ title: '', url: '', description: '', tags: '' });
     setIsEditing(false);
   };
-
+ 
+  //Used when an existing link is being edited, if not true, resets the form
   useEffect(() => {
     if (linkToEdit) {
       setForm({
@@ -35,7 +36,8 @@ function LinkForm({ onAdd, onUpdate, linkToEdit }: Props) {
       resetForm();
     }
   }, [linkToEdit]);
-
+ 
+  //Using the name attribute to handle changes in the the input/text area of the form
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setForm(prev => ({ ...prev, [name]: value }));
@@ -47,7 +49,7 @@ function LinkForm({ onAdd, onUpdate, linkToEdit }: Props) {
       .split(',')
       .map(tag => tag.trim())
       .filter(tag => tag);
-
+     
     if (isEditing && linkToEdit) {
       onUpdate({
         ...linkToEdit,
