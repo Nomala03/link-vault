@@ -15,10 +15,12 @@ function LinkForm({ onAdd, onUpdate, linkToEdit }: Props) {
     description: '',
     tags: '',
   });
+  const [formErrors, setFormErrors] = useState<{ title?: string; url?: string; description?: string; tags?: string }>({});
   const [isEditing, setIsEditing] = useState(false);
 
   const resetForm = () => {
     setForm({ title: '', url: '', description: '', tags: '' });
+    setFormErrors({});
     setIsEditing(false);
   };
  
@@ -36,15 +38,51 @@ function LinkForm({ onAdd, onUpdate, linkToEdit }: Props) {
       resetForm();
     }
   }, [linkToEdit]);
+
+  const validateField =  (name: string, value: string): string | undefined => {
+    switch (name) {
+      case 'title':
+        if (value.trim().length < 3) {
+          return 'Title must be at least 3 characters.';
+        }
+        break;
+      case 'url':
+        const urlPattern = /^(https?:\/\/)[^\s/$.?#].[^\s]*$/i;
+        if (!urlPattern.test(value.trim())) {
+          return 'Enter a valid URL starting with http:// or https://.';
+        }
+        break;
+    }
+    return undefined;
+  };
  
   //Using the name attribute to handle changes in the the input/text area of the form
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setForm(prev => ({ ...prev, [name]: value }));
+
+     const error = validateField(name, value);
+    setFormErrors(prevErrors => ({ ...prevErrors, [name]: error }));
+  };
+
+  //form validation
+  const isFormValid = () => {
+    const errors: typeof formErrors = {};
+    (Object.keys(form) as (keyof typeof form)[]).forEach(field => {
+      const error = validateField(field, form[field]);
+      if (error) errors[field as keyof typeof form] = error;
+    });
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
   };
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+
+    if (!isFormValid()) {
+      return;
+    }
+
     const tagArray = form.tags
       .split(',')
       .map(tag => tag.trim())
@@ -73,6 +111,8 @@ function LinkForm({ onAdd, onUpdate, linkToEdit }: Props) {
         onChange={handleChange}
         required
       />
+      {formErrors.title && <p className="error">{formErrors.title}</p>}
+
       <input
         type="url"
         name="url"
@@ -81,6 +121,8 @@ function LinkForm({ onAdd, onUpdate, linkToEdit }: Props) {
         onChange={handleChange}
         required
       />
+       {formErrors.url && <p className="error">{formErrors.url}</p>}
+
       <textarea
         name="description"
         placeholder="Description (optional)"
